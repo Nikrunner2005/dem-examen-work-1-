@@ -89,19 +89,6 @@ class LoginForm(forms.Form):
         username = cleaned_data.get("username")
         password = cleaned_data.get("password")
 
-        user = authenticate(username=username, password=password)
-        if user is None:
-        
-            raise forms.ValidationError("Неправильный логин или пароль. Попробуйте снова.")
-
-        cleaned_data['user'] = user
-        return cleaned_data
-
-    def clean(self):
-        cleaned_data = super().clean()
-        username = cleaned_data.get("username")
-        password = cleaned_data.get("password")
-
         if not username or not password:
             raise forms.ValidationError("Все поля должны быть заполнены!")
 

@@ -22,7 +22,7 @@ def register(request):
             )
             
             messages.success(request, f"Добро пожаловать, {user.username}!")
-            return redirect('login')  # переадресация на домашнюю страницу
+            return redirect('login')  
         else:
             messages.error(request, "Проверьте корректность введённых данных")
     else:
