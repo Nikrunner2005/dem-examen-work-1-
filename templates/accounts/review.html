@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="home-container">
+    <div class="form-card review-card">
+        <h2 class="form-title">Оставить отзыв</h2>
+
+        <form method="post" class="review-form">
+            {% csrf_token %}
+            <div class="field">
+                {{ form.review.label_tag }}
+     {{ form.review }}
+                {% for error in form.review.errors %}
+                    <p class="error">{{ error }}</p>
+                {% endfor %}
+            </div>
+
+            <button type="submit" class="review-btn">Сохранить</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

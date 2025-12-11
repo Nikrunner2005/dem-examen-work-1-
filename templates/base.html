@@ -1,0 +1,43 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title|default:"Сайт" }}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+<header class="header">
+    <div class="container">
+
+        <h2 class="logo">KUPICURS</h2>
+
+<nav class="nav">
+    {% if user.is_authenticated %}
+        <div class="user-info">
+             <a href="{% url 'home' %}" class="course">Оставить заявку</a>
+            <a href="{% url 'profile' %}" class="username">{{ user.username }}</a>
+            <form method="post" action="{% url 'logout' %}" class="logout-form">
+                {% csrf_token %}
+                <button type="submit" class="logout-btn">Выйти</button>
+            </form>
+        </div>
+    {% else %}
+        <a href="{% url 'login' %}" class="nav-link">Войти</a>
+        <a href="{% url 'register' %}" class="nav-link">Регистрация</a>
+    {% endif %}
+</nav>
+
+
+
+    </div>
+</header>
+
+
+<main>
+    {% block content %}
+    {% endblock %}
+</main>
+
+</body>
+</html>

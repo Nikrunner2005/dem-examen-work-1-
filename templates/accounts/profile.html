@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>Ваши заявки</h1>
+
+<div class="profile-card">
+
+{% if requests %}
+    <table class="requests-table">
+        <tr>
+            <th>Курс</th>
+            <th>Дата начала</th>
+            <th>Статус</th>
+            <th>Отзыв</th>
+        </tr>
+
+        {% for r in requests %}
+        <tr>
+            <td>{{ r.get_course_display }}</td>
+            <td>{{ r.date_start|date:"d.m.Y" }}</td>
+            <td>{{ r.get_status_display }}</td>
+            <td>
+                {% if r.status == 'finished' %}
+                    {% if r.review %}
+                        Отзыв оставлен
+                    {% else %}
+                        <a href="{% url 'review' r.pk %}" class="send-btn">Оставить отзыв</a>
+                    {% endif %}
+                {% else %}
+                    -
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+{% else %}
+    <p>У вас пока нет заявок.</p>
+{% endif %}
+
+</div>
+
+{% endblock %}

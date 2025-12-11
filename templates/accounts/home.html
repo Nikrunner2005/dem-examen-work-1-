@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="slider-container">
+    <div class="slider">
+        <div class="slide active">
+            <img src="{% static 'images/img1.jpg' %}" alt="">
+        </div>
+        <div class="slide">
+            <img src="{% static 'images/img2.jpg' %}" alt="">
+        </div>
+        <div class="slide">
+            <img src="{% static 'images/img3.jpg' %}" alt="">
+        </div>
+    </div>
+
+    <button class="prev-btn">❮</button>
+    <button class="next-btn">❯</button>
+</div>
+
+<div class="home-container">
+    <h1>Добро пожаловать, {{ user.username }}!</h1>
+
+    <div class="form-card">
+        <h2>Оставить заявку на курс</h2>
+
+        <form method="post">
+            {% csrf_token %}
+{% for field in form %}
+    <div class="field">
+        {{ field.label_tag }}
+        {{ field }}
+        {% for error in field.errors %}
+            <p class="error">{{ error }}</p>
+        {% endfor %}
+    </div>
+{% endfor %}
+
+
+            <button type="submit" class="send-btn">Отправить</button>
+        </form>
+    </div>
+</div>
+<script src="{% static 'js/slider.js' %}"></script>
+{% endblock %}
